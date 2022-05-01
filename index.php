@@ -21,6 +21,60 @@ $desc = "PLATEA";
 
 $ref = "24831KMMT5YM14";
 
+
+
+$entrada = $entityManager->getRepository("Thos\Entrada")->find($ref);
+
+var_dump($entrada->getId());
+
+
+/*
+$sql = <<<SQL
+     SELECT e.TITOL,
+            e.IMATGE, 
+            d.DATA, 
+            d.HORA, 
+            l.LLOC, 
+            l.ACRECA, 
+            l.LOCALITAT, 
+            z.DESCRIPCIO
+    from ENTRADA as t 
+        inner join EVENT as e on t.event_id = e.id 
+        inner join DATA as d on t.data_id = d.id
+        inner join LOCALITZACIO as l on t.loc_id = l.id
+        inner join ZONA as z on t.zona_id = z.id
+    
+        where t.ID=$ref;
+        SQL;
+
+$query = $entityManager->getConnection()->query($sql);
+$resultado2 = $query->fetchAll();
+var_dump($resultado2);
+
+
+
+
+//var_dump($resultado1);
+*/
+/*
+$query = ('
+SELECT e.TITOL, e.IMATGE , d.DATA, d.HORA, l.LLOC, l.ACRECA, l.LOCALITAT, z.DESCRIPCIO
+    from ENTRADA as t 
+        inner join EVENT as e on t.event_id = e.id 
+        inner join DATA as d on t.data_id = d.id
+        inner join LOCALITZACIO as l on t.loc_id = l.id
+        inner join ZONA as z on t.zona_id = z.id
+    
+        where t.ID = ?');
+
+$stmt = $entityManager->prepare($query);
+$query->bindValue(1, $ref);
+
+$stmt = execute();
+
+var_dump($stmt);
+
+*/
 /*
 $temas = $entityManager->getRepository("Thos\Zona")->FindBy(["descripcio" => $desc]);
 
@@ -53,7 +107,7 @@ foreach ($resultado1 as $tema){
 
 
 //Query builder
-
+/*
 $resultado1 = $entityManager->createQueryBuilder()
     ->select('t')->from('Thos\Entrada','t')
     ->where('t.id =:ref')
@@ -106,7 +160,7 @@ $mpdf = new \Mpdf\Mpdf();
 
 //var_dump($products);
 //echo $products;
-
+*/
 if (isset ( $_GET ['ref'] )) {
 
     require_once __DIR__ . '/vendor/autoload.php';
