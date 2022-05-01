@@ -1,0 +1,12 @@
+{
+    "require": {
+        "mpdf/mpdf": "^8.1",
+        "doctrine/orm": "*",
+		"symfony/cache": "*",
+		"doctrine/annotations": "*"
+	},
+	"autoload": {
+		"psr-0": { "": "model/" }
+	
+    }
+}
