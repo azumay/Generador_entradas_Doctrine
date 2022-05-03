@@ -3,11 +3,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once "config/ini-config.php";
-/*
+
 $app = new App();
 $app->run();
-*/
 
+/*
 use Thos\Data;
 use Thos\Entrada;
 use Thos\Event;
@@ -17,15 +17,15 @@ use Thos\Zona;
 
 require_once "model/bootstrap.php";
 
-$desc = "PLATEA";
+//$desc = "PLATEA";
 
-$ref = "24831KMMT5YM14";
+//$ref = "24831KMMT5YM14";
 
-
+/*
 
 $entrada = $entityManager->getRepository("Thos\Entrada")->find($ref);
 
-var_dump($entrada->getId());
+echo $entrada->getEvent()->getTitol();
 
 
 /*
@@ -50,13 +50,12 @@ $sql = <<<SQL
 $query = $entityManager->getConnection()->query($sql);
 $resultado2 = $query->fetchAll();
 var_dump($resultado2);
-
-
-
-
-//var_dump($resultado1);
 */
+
+
+
 /*
+
 $query = ('
 SELECT e.TITOL, e.IMATGE , d.DATA, d.HORA, l.LLOC, l.ACRECA, l.LOCALITAT, z.DESCRIPCIO
     from ENTRADA as t 
@@ -73,8 +72,9 @@ $query->bindValue(1, $ref);
 $stmt = execute();
 
 var_dump($stmt);
-
 */
+
+
 /*
 $temas = $entityManager->getRepository("Thos\Zona")->FindBy(["descripcio" => $desc]);
 
@@ -110,22 +110,28 @@ foreach ($resultado1 as $tema){
 /*
 $resultado1 = $entityManager->createQueryBuilder()
     ->select('t')->from('Thos\Entrada','t')
-    ->where('t.id =:ref')
+    ->where('t.id = :ref')
     ->setParameter('ref', $ref)
     ->getQuery()
     ->getResult();
 
-// echo "<pre>";
-// var_dump($resultado1);
+ echo "<pre>";
+//var_dump($resultado1->getEvent());
 
-// echo "</pre>";
+ echo "</pre>";
+*/
 
-$fila;
-$butaca;
-$dni;
+ /*foreach ($resultado1 as $entrada){
+        echo  $entrada->getFila(). ' ' .
+        $entrada->getCompardor(). ' ' .
+        $entrada->getTitol()
+         ;
+ }*/
 
 
 
+
+/*
 
 $mpdf = new \Mpdf\Mpdf();
 
@@ -161,6 +167,7 @@ $mpdf = new \Mpdf\Mpdf();
 //var_dump($products);
 //echo $products;
 */
+/*
 if (isset ( $_GET ['ref'] )) {
 
     require_once __DIR__ . '/vendor/autoload.php';
@@ -208,15 +215,6 @@ if (isset ( $_GET ['ref'] )) {
 
   */  
 
-}
 
 
-/*
-$queryAutores= $entityManager->getRepository(Entrada::class)->findAll();
-echo "<h1>Query Autores:</h1>";
-echo "<pre>";
-var_dump($queryAutores);
-echo "</pre>";
-*/
 
-?>
