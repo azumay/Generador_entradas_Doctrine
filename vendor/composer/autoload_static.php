@@ -22,6 +22,11 @@ class ComposerStaticInit3ef8c9e66f003b89ff665fc598b9c800
         array (
             'setasign\\Fpdi\\' => 14,
         ),
+        'c' => 
+        array (
+            'chillerlan\\Settings\\' => 20,
+            'chillerlan\\QRCode\\' => 18,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -43,6 +48,7 @@ class ComposerStaticInit3ef8c9e66f003b89ff665fc598b9c800
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
+            'Picqer\\Barcode\\' => 15,
         ),
         'M' => 
         array (
@@ -73,6 +79,14 @@ class ComposerStaticInit3ef8c9e66f003b89ff665fc598b9c800
         'setasign\\Fpdi\\' => 
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
+        'chillerlan\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
+        ),
+        'chillerlan\\QRCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -137,6 +151,10 @@ class ComposerStaticInit3ef8c9e66f003b89ff665fc598b9c800
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'Picqer\\Barcode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/picqer/php-barcode-generator/src',
         ),
         'Mpdf\\' => 
         array (

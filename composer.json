@@ -3,7 +3,10 @@
         "mpdf/mpdf": "^8.1",
         "doctrine/orm": "*",
 		"symfony/cache": "*",
-		"doctrine/annotations": "*"
+		"doctrine/annotations": "*",
+        "chillerlan/php-qrcode": "^4.3",
+        "ext-gd": "*",
+        "picqer/php-barcode-generator": "^2.2"
 	},
 	"autoload": {
 		"psr-0": { "": "model/" }

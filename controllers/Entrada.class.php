@@ -2,12 +2,17 @@
 
 use Doctrine\ORM\EntityManagerInterface;
 
+use chillerlan\QRCode\QRCode;
+
+
 class Entrada extends Controller{
 
     
 
     public function pdfGenerator($ref){
 
+
+        require_once __DIR__ . '../../vendor/autoload.php';
         require_once "config/ini-config.php";
         
 
@@ -20,8 +25,7 @@ class Entrada extends Controller{
         $subtitolEvent = $entrada->getEvent()->getSubtitol();
         $imatgeEvent = $entrada->getEvent()->getImatge();
 
-
-        var_dump($imatgeEvent);
+        $data = 'www.google.es';
         
         /* Estructura Entrada */
         $htmlEntrada='
@@ -45,10 +49,12 @@ class Entrada extends Controller{
             <td>'.$entrada->getFila().'</td>
             <td>'.$entrada->getButaca().'</td>
             <td>'.$entrada->getCompardor().'</td>
-    </tr>
-</table>';
+            <td>'.$this->generateQR($data).'</td>
+            <td>'.$this->generateCodeBar('0X123172389X').'</td>
+            </tr>
+     </table>';
 
-        require_once __DIR__ . '../../vendor/autoload.php';
+       
         
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->WriteHTML($htmlEntrada);
@@ -58,5 +64,18 @@ class Entrada extends Controller{
         
 
         
+    }
+
+    public function generateQR($url){
+
+        $qr = new QRCode;
+
+
+        return '<img src="'.$qr->render($url).'" alt="QR Code" />';
+    }
+
+    public function generateCodeBar($num){
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+      return  $generator->getBarcode($num, $generator::TYPE_CODE_128);
     }
 }

@@ -7,6 +7,7 @@ namespace Doctrine\Persistence\Mapping;
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Persistence\Proxy;
 use Psr\Cache\CacheItemPoolInterface;
+use ReflectionClass;
 use ReflectionException;
 
 use function array_combine;
@@ -15,7 +16,9 @@ use function array_map;
 use function array_reverse;
 use function array_unshift;
 use function assert;
+use function class_exists;
 use function str_replace;
+use function strpos;
 use function strrpos;
 use function substr;
 
@@ -162,14 +165,20 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
             return $this->loadedMetadata[$className];
         }
 
+        if (class_exists($className, false) && (new ReflectionClass($className))->isAnonymous()) {
+            throw MappingException::classIsAnonymous($className);
+        }
+
+        if (! class_exists($className, false) && strpos($className, ':') !== false) {
+            throw MappingException::nonExistingClass($className);
+        }
+
         $realClassName = $this->getRealClass($className);
 
         if (isset($this->loadedMetadata[$realClassName])) {
             // We do not have the alias name in the map, include it
             return $this->loadedMetadata[$className] = $this->loadedMetadata[$realClassName];
         }
-
-        $loadingException = null;
 
         try {
             if ($this->cache !== null) {
@@ -271,7 +280,7 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
      * Important: The class $name does not necessarily exist at this point here.
      * Scenarios in a code-generation setup might have access to XML/YAML
      * Mapping files without the actual PHP code existing here. That is why the
-     * {@see Doctrine\Persistence\Mapping\ReflectionService} interface
+     * {@see \Doctrine\Persistence\Mapping\ReflectionService} interface
      * should be used for reflection.
      *
      * @param string $name The name of the class for which the metadata should get loaded.
@@ -381,6 +390,14 @@ abstract class AbstractClassMetadataFactory implements ClassMetadataFactory
     {
         if (! $this->initialized) {
             $this->initialize();
+        }
+
+        if (class_exists($className, false) && (new ReflectionClass($className))->isAnonymous()) {
+            return false;
+        }
+
+        if (! class_exists($className, false) && strpos($className, ':') !== false) {
+            throw MappingException::nonExistingClass($className);
         }
 
         /** @psalm-var class-string $className */

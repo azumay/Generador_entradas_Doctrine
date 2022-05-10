@@ -519,7 +519,9 @@ class ClassMetadataInfo implements ClassMetadata
      *
      * @see discriminatorColumn
      *
-     * @var mixed
+     * @var array<string, string>
+     *
+     * @psalm-var array<string, class-string>
      */
     public $discriminatorMap = [];
 
@@ -543,10 +545,10 @@ class ClassMetadataInfo implements ClassMetadata
      * @var mixed[]
      * @psalm-var array{
      *               name: string,
-     *               schema: string,
-     *               indexes: array,
-     *               uniqueConstraints: array,
-     *               options: array<string, mixed>,
+     *               schema?: string,
+     *               indexes?: array,
+     *               uniqueConstraints?: array,
+     *               options?: array<string, mixed>,
      *               quoted?: bool
      *           }
      */
