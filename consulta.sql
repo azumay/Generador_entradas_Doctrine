@@ -22,3 +22,10 @@ SELECT e.TITOL, e.IMATGE , d.DATA, d.HORA, l.LLOC, l.ACRECA, l.LOCALITAT, z.DESC
         inner join ZONA as z on t.zona_id = z.id
     
         where t.ID="24831KRGX5YM14";
+
+SELECT e.TITOL , d.DATA, d.HORA
+    from ENTRADA as t 
+        inner join EVENT as e on t.event_id = e.id 
+        inner join DATA as d on t.data_id = d.id
+    
+        where d.DATA="15/04/2020";
