@@ -23,7 +23,7 @@ class App extends Controller
 
             $ref = $_GET['data'];
             $controller_name = "Evento";
-            $action = "espectacles";
+            $action = "findEspectacles";
 
         } else {
             $controller_name = "Sortida";

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<user_info>
+  <title>Users Information</title>
+  <totalRows>3</totalRows>
+  <rows>
+    <user>
+      <name>John Doe</name>
+      <email>john@doe.com</email>
+    </user>
+    <user>
+      <name>Merry Moe</name>
+      <email>merry@moe.com</email>
+    </user>
+    <user>
+      <name>Hellary Riss</name>
+      <email>hellary@riss.com</email>
+    </user>
+  </rows>
+</user_info>
