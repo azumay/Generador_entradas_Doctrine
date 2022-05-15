@@ -18,11 +18,11 @@ class Evento extends Controller
         $querySQL = $entityManager->getConnection()->query($consultaSQL);
         $resultadoSQL = $querySQL->fetchAll();
 
-     /*   echo "<h1>Consulta SQL:</h1>";
+        /*   echo "<h1>Consulta SQL:</h1>";
         echo "<pre>";
         echo var_dump($resultadoSQL);
         echo "</pre>";
-*/
+         */
         echo $this->createXML($resultadoSQL);
     }
 
@@ -34,26 +34,26 @@ class Evento extends Controller
 
         //creamos un nuevo DOMDocument
         $xmlDoc = new DOMDocument('1.0', 'utf-8');
+        if($longitud != 0){
 
-        //$root = $xmlDoc->createElement('conciertos');
         //creamos el TAG padre
-        $padre = $xmlDoc->createElement("conciertos");
+        $root = $xmlDoc->appendChild($xmlDoc->createElement("eventos"));
 
         //Iteramos dato a dato
         for ($i = 0; $i < $longitud; $i++) {
-
-            $root = $xmlDoc->appendChild($xmlDoc->createElement("evento"));
+            
+            $tabEventos = $root->appendChild($xmlDoc->createElement("concierto"));
 
             //obtenemos el valor de cada elemento y creamos un elemento
-            $root->appendChild($xmlDoc->createElement("titol", $data[$i]['TITOL']));
-            $root->appendChild($xmlDoc->createElement("data", $data[$i]['DATA']));
-            $root->appendChild($xmlDoc->createElement("hora", $data[$i]['HORA']));
-           
+            $tabEventos->appendChild($xmlDoc->createElement("titol", $data[$i]['TITOL']));
+            $tabEventos->appendChild($xmlDoc->createElement("data", $data[$i]['DATA']));
+            $tabEventos->appendChild($xmlDoc->createElement("hora", $data[$i]['HORA']));
+            
         }
-
-       $root->appendChild($padre);
-       
-
+    }
+    else{
+        $root = $xmlDoc->appendChild($xmlDoc->createElement("eventos", "Sin eventos"));
+    }
         header("Content-Type: text/plain");
 
         //con esta ocpión agregamos tabulaciones a nuestro fichero XML

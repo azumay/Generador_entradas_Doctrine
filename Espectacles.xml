@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<evento>
-  <titol>THE VERY BEST OF DIRE STRAITS</titol>
-  <data>15/04/2020</data>
-  <hora>21:30</hora>
-</evento>
-<evento>
-  <titol>Elefantes</titol>
-  <data>15/04/2020</data>
-  <hora>21:30</hora>
-</evento>
-<evento>
-  <titol>THE VERY BEST OF DIRE STRAITS</titol>
-  <data>15/04/2020</data>
-  <hora>21:30</hora>
-</evento>
-<evento>
-  <titol>Elefantes</titol>
-  <data>15/04/2020</data>
-  <hora>21:30</hora>
-  <conciertos/>
-</evento>
+<eventos>
+  <concierto>
+    <titol>THE VERY BEST OF DIRE STRAITS</titol>
+    <data>18/04/2020</data>
+    <hora>21:30</hora>
+  </concierto>
+  <concierto>
+    <titol>Elefantes</titol>
+    <data>18/04/2020</data>
+    <hora>21:30</hora>
+  </concierto>
+</eventos>
