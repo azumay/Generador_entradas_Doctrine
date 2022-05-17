@@ -13,8 +13,9 @@ class Entrada extends Controller
 
         require_once __DIR__ . "../../model/bootstrap.php";
 
-        $entrada = $entityManager->getRepository("Thos\Entrada")->find($ref);
+       if( $entrada = $entityManager->getRepository("Thos\Entrada")->find($ref)){
         
+       
 
         /* Valores para la Entrada */
         $tituloEvent = $entrada->getEvent()->getTitol();
@@ -167,21 +168,13 @@ class Entrada extends Controller
        
      ;
 
+
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->WriteHTML($htmlEntrada);
-        $mpdf->Output('Entrada.pdf');
+        $mpdf->Output();
         
-        echo "<h1>Entrada generada correctamente</h1>";
-
-        $pattern = "/img/";
-             echo $imatgeEvent. '<br>';
-        
-        //echo preg_match($pattern, $imatgeEvent);
-
-        echo $imgEvento;
-             
-
-        //echo $htmlEntrada;
+            }
+            echo "<p class='error'>No existe la entrada con la ref: <b>".$ref."</b></p>";
     }
 
     public function generateQR($url)

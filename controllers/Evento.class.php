@@ -2,6 +2,7 @@
 class Evento extends Controller
 {
 
+
     public function findEspectacles($dia)
     {
 
@@ -10,20 +11,26 @@ class Evento extends Controller
 
         require_once __DIR__ . "../../model/bootstrap.php";
 
-        $consultaSQL = "SELECT e.TITOL , d.DATA, d.HORA from ENTRADA as t
-        inner join EVENT as e on t.event_id = e.id
+        $consultaSQL = "SELECT e.TITOL ,e.SUTBITOL, d.DATA, d.HORA,l.LLOC from ENTRADA as t
+                inner join EVENT as e on t.event_id = e.id
                 inner join DATA as d on t.data_id = d.id
+                inner join LOCALITZACIO as l on t.loc_id = l.id
         where d.DATA='$dia'";
 
         $querySQL = $entityManager->getConnection()->query($consultaSQL);
         $resultadoSQL = $querySQL->fetchAll();
 
-        /*   echo "<h1>Consulta SQL:</h1>";
-        echo "<pre>";
-        echo var_dump($resultadoSQL);
-        echo "</pre>";
-         */
-        echo $this->createXML($resultadoSQL);
+        
+        $this->createXML($resultadoSQL);
+        
+    
+        echo "Fichero guardado en la raiz del proyecto Espectacles.xml";
+        
+        //include "./Espectacles.xml";
+          
+           
+     
+
     }
 
     public function createXML($data)
@@ -34,7 +41,9 @@ class Evento extends Controller
 
         //creamos un nuevo DOMDocument
         $xmlDoc = new DOMDocument('1.0', 'utf-8');
+
         if($longitud != 0){
+
 
         //creamos el TAG padre
         $root = $xmlDoc->appendChild($xmlDoc->createElement("eventos"));
@@ -46,8 +55,10 @@ class Evento extends Controller
 
             //obtenemos el valor de cada elemento y creamos un elemento
             $tabEventos->appendChild($xmlDoc->createElement("titol", $data[$i]['TITOL']));
+            $tabEventos->appendChild($xmlDoc->createElement("subtitol", $data[$i]['SUTBITOL']));
             $tabEventos->appendChild($xmlDoc->createElement("data", $data[$i]['DATA']));
             $tabEventos->appendChild($xmlDoc->createElement("hora", $data[$i]['HORA']));
+            $tabEventos->appendChild($xmlDoc->createElement("lugar", $data[$i]['LLOC']));
             
         }
     }
@@ -63,7 +74,7 @@ class Evento extends Controller
         $file_name = 'Espectacles.xml';
         $xmlDoc->save("./" . $file_name);
 
-        //Devolvemos el fichero
         return $file_name;
     }
+    
 }

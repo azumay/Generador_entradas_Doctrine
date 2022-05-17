@@ -1,8 +1,13 @@
+<html>
+<link rel="stylesheet" href="styles/estilos.css">
+
+
 <?php
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once "config/ini-config.php";
+
 
 $app = new App();
 $app->run();
@@ -217,4 +222,5 @@ if (isset ( $_GET ['ref'] )) {
 
 
 
-
+?>
+</html>
