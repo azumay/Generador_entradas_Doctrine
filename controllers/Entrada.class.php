@@ -166,11 +166,15 @@ class Entrada extends Controller
                
                 <img class="event-img" src="'.$imgEvento.'"/>
                 <p class="alert">Enseña el código QR en la entrada para acceder al evento</p>
+                
              </div>
+             <b>'. $confirmacion.'</b>
                 </td>
+                
             </tr>
             <br>
             <img src="img/CodeBar.png"/>
+            
             
         </tfoot>
       
@@ -179,8 +183,10 @@ class Entrada extends Controller
        
      ;
 
-
+             
         $mpdf = new \Mpdf\Mpdf();
+        $mpdf->SetWatermarkImage('img/pagado.png', 0.2, array(140,140));
+        $mpdf->showWatermarkImage = true;
         $mpdf->WriteHTML($htmlEntrada);
         $mpdf->Output();
         
