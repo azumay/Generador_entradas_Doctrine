@@ -14,14 +14,13 @@ class App extends Controller
 
         if (isset($_GET['ref'])) {
             $ref = $this->sanitize($_GET['ref']);
-            //$ref = trim ( $_GET ['url'], '/' );                  //trec la barra final
-            //$ref = filter_var ( $url, FILTER_SANITIZE_URL );     //elimino caràcters especial
+            $ref = trim ( $_GET ['ref'], '/' ); //trec la barra final
+            $ref = filter_var ( $ref, FILTER_SANITIZE_URL ); //elimino caràcters especial
 
             $controller_name = "Entrada";
             $action = "pdfGenerator";
         } else if (isset($_GET['data'])) {
-
-            $ref = $_GET['data'];
+            $ref = $this->sanitize($_GET['data']);
             $controller_name = "Evento";
             $action = "findEspectacles";
 
