@@ -30,6 +30,7 @@ class Evento extends Controller
 
         echo $this->createXML($resultadoSQL);
 
+         
     }
 
     /**
@@ -49,7 +50,7 @@ class Evento extends Controller
 
         //creamos un nuevo DOMDocument
         $xmlDoc = new DOMDocument('1.0', 'UTF-8');
-
+        
         if ($longitud != 0) {
 
             //creamos el TAG padre
@@ -71,16 +72,16 @@ class Evento extends Controller
         } else {
             $root = $xmlDoc->appendChild($xmlDoc->createElement("eventos", ""));
         }
-        header("Content-Type: text/xml");
+
+        //header("Content-Type: text/xml");
 
         //con esta ocpión agregamos tabulaciones a nuestro fichero XML
         $xmlDoc->formatOutput = true;
-        $xmlDoc->validateOnParse = true;
-
-        //Nombre y ubicación donde guardamos el fichero
-        $file_name = 'Espectacles.xml';
-
+      
+        //Devolvemos el nodo 
         return $xmlDoc->saveXML();
+
+        
 
     }
 }

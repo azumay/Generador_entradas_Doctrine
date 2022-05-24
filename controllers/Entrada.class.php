@@ -68,7 +68,9 @@ class Entrada extends Controller
             $this->zonaEvento = $entrada->getZona()->getDescripcio();
             $this->confirmacion = $entrada->getPagament()->getReferenciaExterna();
             $this->generateCodeBar($this->confirmacion);
-            $this->data = 'http://localhost/M7_Entrada/?ref=' . $ref . '';
+
+            //Variable con la URL actual + parametros 
+            $this->data = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 
             /* Agregamos la marca de agua en el documento */
             $mpdf->SetWatermarkImage('img/pagado.png', 0.2, array(140, 140));
